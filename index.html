@@ -11,23 +11,25 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Segoe UI',sans-serif;
+font-family:Arial,sans-serif;
 }
 
 body{
 overflow:hidden;
-color:white;
-text-align:center;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
 }
 
-#videoFondo{
+video{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
 object-fit:cover;
-z-index:-3;
+z-index:-2;
 }
 
 .overlay{
@@ -37,270 +39,223 @@ left:0;
 width:100%;
 height:100%;
 background:rgba(0,0,0,.55);
-z-index:-2;
+z-index:-1;
 }
 
-.contenido{
-height:100vh;
+.phone{
+width:360px;
+height:720px;
+background:#111;
+border-radius:40px;
+padding:12px;
+box-shadow:0 0 40px rgba(255,255,255,.2);
+}
+
+.screen{
+height:100%;
+background:url("https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200") center/cover;
+border-radius:30px;
+overflow:hidden;
 display:flex;
 flex-direction:column;
+}
+
+.header{
+background:#075E54;
+color:white;
+padding:15px;
+font-size:22px;
+font-weight:bold;
+}
+
+.chat{
+flex:1;
+padding:15px;
+overflow-y:auto;
+}
+
+.msg{
+padding:10px 15px;
+margin:10px 0;
+border-radius:15px;
+max-width:80%;
+animation:fade .5s;
+}
+
+.yo{
+background:#DCF8C6;
+margin-left:auto;
+color:black;
+}
+
+.ella{
+background:white;
+color:black;
+}
+
+.input{
+padding:10px;
+background:#202C33;
+display:flex;
 justify-content:center;
-align-items:center;
-padding:20px;
-}
-
-h1{
-font-size:4rem;
-text-shadow:0 0 20px rgba(255,255,255,.8);
-margin-bottom:20px;
-}
-
-p{
-max-width:900px;
-font-size:1.4rem;
-line-height:1.8;
-margin-bottom:25px;
 }
 
 button{
-padding:16px 35px;
+padding:12px 20px;
 border:none;
-border-radius:50px;
-background:white;
-color:#ff2d75;
-font-size:1rem;
-font-weight:bold;
+border-radius:25px;
+background:#25D366;
+color:white;
+font-size:16px;
 cursor:pointer;
-transition:.4s;
+font-weight:bold;
 }
 
-button:hover{
-transform:scale(1.1);
-}
-
-.hidden{
-display:none;
-}
-
-#contador{
-font-size:1.6rem;
-margin-top:25px;
-}
-
-#carta{
-font-size:1.4rem;
-max-width:900px;
-line-height:2;
-}
-
-.heart{
-position:fixed;
-bottom:-50px;
-font-size:30px;
-animation:subir linear infinite;
-pointer-events:none;
-}
-
-@keyframes subir{
-0%{
-transform:translateY(0);
-opacity:1;
-}
-100%{
-transform:translateY(-120vh);
+@keyframes fade{
+from{
 opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
 }
 }
 
-#videoFinal{
-width:90%;
-max-width:900px;
-border-radius:20px;
-box-shadow:0 0 30px rgba(255,255,255,.3);
+.final{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+background:rgba(0,0,0,.8);
+color:white;
+text-align:center;
+padding:20px;
 }
 
-#mensajeFinal{
-font-size:2rem;
-margin-top:30px;
+.final h1{
+font-size:50px;
+margin-bottom:20px;
+}
+
+.final p{
+font-size:24px;
+max-width:800px;
+line-height:1.7;
 }
 
 </style>
 </head>
-
 <body>
 
-<video autoplay muted loop playsinline id="videoFondo">
+<video autoplay muted loop playsinline>
 <source src="b0d98ba93d1049b2021946719203bb3b.mp4" type="video/mp4">
 </video>
 
 <div class="overlay"></div>
 
-<div class="contenido" id="inicio">
+<div class="phone">
 
-<h1>Dorelly ❤️</h1>
+<div class="screen">
+
+<div class="header">
+❤️ Dorelly
+</div>
+
+<div class="chat" id="chat"></div>
+
+<div class="input">
+<button onclick="iniciarHistoria()">
+Enviar ❤️
+</button>
+</div>
+
+</div>
+
+</div>
+
+<div class="final" id="final">
+
+<h1>❤️ Dorelly ❤️</h1>
 
 <p>
-Hay personas que pasan por nuestra vida...
-y otras que hacen que los días tengan más color.
+No sé si esta página logre expresar todo lo que siento.
+
+Pero quería que supieras que eres una persona muy especial para mí.
+
+Cada conversación contigo hace mis días mejores.
+
+Y si algo tengo claro...
+
+es que me encanta haberte conocido. 🌹
 </p>
-
-<button onclick="abrirCarta()">
-Abrir mi corazón 💌
-</button>
-
-</div>
-
-<div class="contenido hidden" id="pantallaCarta">
-
-<h1>Para ti 🌹</h1>
-
-<p id="carta"></p>
-
-<div id="contador"></div>
-
-<br>
-
-<button onclick="mostrarVideoFinal()">
-Quiero ver más ❤️
-</button>
-
-</div>
-
-<div class="contenido hidden" id="pantallaVideo">
-
-<h1>Mi sorpresa para ti 🎥</h1>
-
-<video id="videoFinal" controls autoplay>
-<source src="d6dc3f8a3f4b58de49c2f94e281ad6e9.mp4" type="video/mp4">
-</video>
-
-<br><br>
-
-<button onclick="mostrarFinal()">
-Última sorpresa ❤️
-</button>
-
-</div>
-
-<div class="contenido hidden" id="pantallaFinal">
-
-<h1>💖 Dorelly 💖</h1>
-
-<p id="mensajeFinal">
-No hice esta página para impresionarte.
-
-La hice porque quería que supieras que eres alguien muy especial para mí.
-
-Gracias por cada conversación,
-cada sonrisa y cada momento.
-
-❤️
-</p>
-
-<br>
-
-<button onclick="respuestaFinal()">
-¿Me regalas una sonrisa? 😊
-</button>
-
-<div id="mensajeRespuesta"></div>
 
 </div>
 
 <script>
 
-const texto = `
-No sé exactamente cuándo comenzó todo.
+let iniciado=false;
 
-Pero hubo un momento en que hablar contigo se volvió una de las mejores partes de mis días.
+const mensajes=[
 
-Hay personas que llegan sin avisar y terminan ocupando un lugar importante en nuestro corazón.
+{tipo:"yo",texto:"Hola Dorelly ❤️"},
+{tipo:"ella",texto:"Hola 😊"},
+{tipo:"yo",texto:"Quería decirte algo..."},
+{tipo:"ella",texto:"¿Qué pasa?"},
+{tipo:"yo",texto:"Que me alegras los días más de lo que imaginas."},
+{tipo:"ella",texto:"🥹"},
+{tipo:"yo",texto:"Que cada vez que hablo contigo sonrío."},
+{tipo:"yo",texto:"Y que eres una persona increíble."},
+{tipo:"ella",texto:"❤️"},
+{tipo:"yo",texto:"Por eso hice esta página para ti."},
+{tipo:"yo",texto:"Porque quería que supieras lo especial que eres."}
 
-Tú eres una de ellas.
+];
 
-Por eso hice esto.
+function iniciarHistoria(){
 
-Porque quería que supieras que eres especial.
-`;
+if(iniciado) return;
+
+iniciado=true;
 
 let i=0;
 
-function abrirCarta(){
+const intervalo=setInterval(()=>{
 
-document.getElementById("inicio").classList.add("hidden");
-document.getElementById("pantallaCarta").classList.remove("hidden");
+const chat=document.getElementById("chat");
 
-let efecto=setInterval(()=>{
+const div=document.createElement("div");
 
-if(i<texto.length){
-document.getElementById("carta").innerHTML+=texto.charAt(i);
+div.className="msg "+mensajes[i].tipo;
+
+div.innerText=mensajes[i].texto;
+
+chat.appendChild(div);
+
+chat.scrollTop=chat.scrollHeight;
+
 i++;
-}else{
-clearInterval(efecto);
-}
 
-},40);
+if(i>=mensajes.length){
 
-}
-
-function mostrarVideoFinal(){
-
-document.getElementById("pantallaCarta").classList.add("hidden");
-document.getElementById("pantallaVideo").classList.remove("hidden");
-
-}
-
-function mostrarFinal(){
-
-document.getElementById("pantallaVideo").classList.add("hidden");
-document.getElementById("pantallaFinal").classList.remove("hidden");
-
-}
-
-function respuestaFinal(){
-
-document.getElementById("mensajeRespuesta").innerHTML=
-"<h2 style='margin-top:30px'>Sabía que sí ❤️😊</h2>";
-
-}
-
-function crearCorazon(){
-
-let heart=document.createElement("div");
-
-heart.className="heart";
-heart.innerHTML="❤️";
-
-heart.style.left=Math.random()*100+"vw";
-heart.style.animationDuration=(Math.random()*4+4)+"s";
-
-document.body.appendChild(heart);
+clearInterval(intervalo);
 
 setTimeout(()=>{
-heart.remove();
-},8000);
+
+document.getElementById("final").style.display="flex";
+
+},4000);
 
 }
 
-setInterval(crearCorazon,250);
-
-const fechaInicio = new Date("2025-01-01");
-
-function actualizarContador(){
-
-const ahora = new Date();
-
-const diferencia = ahora - fechaInicio;
-
-const dias = Math.floor(diferencia/(1000*60*60*24));
-
-document.getElementById("contador").innerHTML=
-"🌹 Han pasado <b>"+dias+"</b> días desde que comenzó esta historia 🌹";
+},1800);
 
 }
-
-setInterval(actualizarContador,1000);
-actualizarContador();
 
 </script>
 
