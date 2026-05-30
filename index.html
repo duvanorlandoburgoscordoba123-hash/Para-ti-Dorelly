@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,259 +6,313 @@
 <title>Para Dorelly ❤️</title>
 
 <style>
-
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family:'Segoe UI',sans-serif;
 }
 
 body{
-overflow:hidden;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+overflow-x:hidden;
 color:white;
-height:100vh;
-}
-
-#videoFondo{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-object-fit:cover;
-z-index:-3;
-}
-
-.overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.55);
-z-index:-2;
-}
-
-.contenedor{
-position:relative;
-z-index:10;
-max-width:900px;
-margin:auto;
-padding:40px 20px;
 text-align:center;
+}
+
+section{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:30px;
 }
 
 h1{
 font-size:3rem;
 margin-bottom:20px;
-text-shadow:0 0 20px #ff8fab;
+text-shadow:0 0 15px rgba(255,255,255,.6);
 }
 
-.whatsapp{
-background:#0b141a;
-border-radius:20px;
-padding:20px;
-margin-top:20px;
-box-shadow:0 0 20px rgba(255,255,255,.15);
-}
-
-.msg{
-padding:12px;
-border-radius:15px;
-margin:10px;
-max-width:80%;
-font-size:16px;
-}
-
-.yo{
-background:#005c4b;
-margin-left:auto;
-text-align:left;
-}
-
-.ella{
-background:#202c33;
-margin-right:auto;
-text-align:left;
+p{
+max-width:800px;
+font-size:1.2rem;
+line-height:1.8;
+margin-bottom:20px;
 }
 
 button{
-margin-top:25px;
 padding:15px 30px;
 border:none;
-border-radius:30px;
-font-size:20px;
-background:#ff4d6d;
-color:white;
+border-radius:50px;
+background:white;
+color:#ff4f81;
+font-size:1rem;
+font-weight:bold;
 cursor:pointer;
+transition:.3s;
 }
 
-#carta{
+button:hover{
+transform:scale(1.1);
+}
+
+.hidden{
 display:none;
-margin-top:25px;
-background:rgba(255,255,255,.15);
-backdrop-filter:blur(10px);
-padding:25px;
-border-radius:20px;
 }
 
-.corazon,
-.rosa{
-position:absolute;
-pointer-events:none;
+video{
+width:90%;
+max-width:800px;
+border-radius:20px;
+box-shadow:0 0 25px rgba(0,0,0,.4);
+margin-top:20px;
+}
+
+#respuesta{
+font-size:2rem;
+margin-top:20px;
+animation:aparecer 1s;
+}
+
+@keyframes aparecer{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.heart{
+position:fixed;
+font-size:25px;
 animation:caer linear infinite;
+top:-50px;
+z-index:999;
 }
 
 @keyframes caer{
-0%{
-transform:translateY(-100px);
-opacity:1;
-}
-100%{
+to{
 transform:translateY(110vh);
-opacity:0;
 }
 }
-
 </style>
 </head>
 
 <body>
 
-<video id="videoFondo" loop playsinline>
+<section id="inicio">
+<h1>❤️ Para Dorelly ❤️</h1>
+
+<p>
+Hola Dorelly...
+Esta no es una página cualquiera.
+Es algo que hice pensando en ti.
+</p>
+
+<button onclick="mostrarCarta()">
+Quiero descubrirlo ✨
+</button>
+</section>
+
+<section id="carta" class="hidden">
+
+<h1>🌹 Una pequeña carta</h1>
+
+<p id="texto"></p>
+
+<button onclick="mostrarVideo1()">
+Continuar ❤️
+</button>
+
+</section>
+
+<section id="video1" class="hidden">
+
+<h1>🎥 Un recuerdo especial</h1>
+
+<p>
+Hay momentos que valen la pena guardar...
+porque nos recuerdan personas especiales.
+</p>
+
+<video controls>
 <source src="b0d98ba93d1049b2021946719203bb3b.mp4" type="video/mp4">
 </video>
 
-<div class="overlay"></div>
+<br><br>
 
-<div class="contenedor">
-
-<h1>❤️ Para Dorelly ❤️</h1>
-
-<div class="whatsapp">
-
-<div class="msg yo">
-Hola Dorelly 😊
-</div>
-
-<div class="msg ella">
-Hola ❤️
-</div>
-
-<div class="msg yo">
-Quería decirte algo...
-</div>
-
-<div class="msg ella">
-¿Qué pasó? 👀
-</div>
-
-<div class="msg yo">
-Desde que te conocí, mis días tienen algo especial ✨
-</div>
-
-<div class="msg ella">
-🥰🥰🥰
-</div>
-
-<div class="msg yo">
-Y quería que supieras que eres una persona muy importante para mí ❤️
-</div>
-
-</div>
-
-<button onclick="mostrarCarta()">
-💌 Abrir carta
+<button onclick="mostrarJuego()">
+Seguir 💕
 </button>
 
-<div id="carta">
+</section>
 
-<h2>🌹 Para ti 🌹</h2>
+<section id="juego" class="hidden">
+
+<h1>💖 Una pregunta para ti</h1>
+
+<p>¿Crees en las casualidades?</p>
 
 <br>
 
+<button onclick="respuesta()">
+Sí
+</button>
+
+<button onclick="respuesta()">
+No
+</button>
+
+<div id="respuesta"></div>
+
+<br>
+
+<button id="btnFinal" class="hidden" onclick="mostrarVideo2()">
+Continuar ❤️
+</button>
+
+</section>
+
+<section id="video2" class="hidden">
+
+<h1>🎬 Algo más para ti</h1>
+
 <p>
-No sé qué traerá el futuro, pero sí sé que disfruto cada momento contigo.
+Y si algún día dudas de lo especial que eres,
+vuelve a ver esto.
+</p>
+
+<video controls>
+<source src="d6dc3f8a3f4b58de49c2f94e281ad6e9.mp4" type="video/mp4">
+</video>
+
+<br><br>
+
+<button onclick="finalRomantico()">
+Última sorpresa ❤️
+</button>
+
+</section>
+
+<section id="final" class="hidden">
+
+<h1>💘 Dorelly 💘</h1>
+
+<p style="font-size:1.5rem;">
+No hice esta página para impresionarte.
+La hice porque quería que supieras que eres alguien muy importante para mí.
+
+<br><br>
+
+No sé qué nos depare el futuro,
+pero sí sé que cada momento contigo ha significado mucho.
+
+<br><br>
+
+Gracias por existir. ❤️
 </p>
 
 <br>
 
-<p>
-Gracias por tu sonrisa, por tu forma de ser y por los momentos que compartimos.
-</p>
+<button onclick="sonrisa()">
+¿Me regalas una sonrisa? 😊
+</button>
 
-<br>
+<div id="sonrisa"></div>
 
-<h3>
-❤️ Dorelly, eres muy especial para mí ❤️
-</h3>
-
-</div>
-
-</div>
+</section>
 
 <script>
 
+const mensaje = `
+No sé exactamente cuándo empezó todo,
+pero poco a poco te convertiste en alguien especial para mí.
+
+Hay personas que llegan y pasan,
+y hay otras que dejan algo bonito en el corazón.
+
+Tú eres de esas personas.
+
+Por eso hice esto...
+para que supieras cuánto vales.
+`;
+
+let i=0;
+
 function mostrarCarta(){
+document.getElementById("inicio").classList.add("hidden");
+document.getElementById("carta").classList.remove("hidden");
 
-document.getElementById("carta").style.display="block";
+let intervalo=setInterval(()=>{
+if(i<mensaje.length){
+document.getElementById("texto").innerHTML+=mensaje.charAt(i);
+i++;
+}else{
+clearInterval(intervalo);
+}
+},40);
+}
 
-const video=document.getElementById("videoFondo");
+function mostrarVideo1(){
+document.getElementById("carta").classList.add("hidden");
+document.getElementById("video1").classList.remove("hidden");
+}
 
-video.play();
+function mostrarJuego(){
+document.getElementById("video1").classList.add("hidden");
+document.getElementById("juego").classList.remove("hidden");
+}
 
-video.muted=false;
+function respuesta(){
 
-video.volume=1;
+document.getElementById("respuesta").innerHTML=
+"❤️ Porque conocerte fue la mejor casualidad que me ha pasado ❤️";
 
+document.getElementById("btnFinal").classList.remove("hidden");
+}
+
+function mostrarVideo2(){
+document.getElementById("juego").classList.add("hidden");
+document.getElementById("video2").classList.remove("hidden");
+}
+
+function finalRomantico(){
+document.getElementById("video2").classList.add("hidden");
+document.getElementById("final").classList.remove("hidden");
+}
+
+function sonrisa(){
+document.getElementById("sonrisa").innerHTML=
+"<h2>Sabía que sí 😊❤️</h2>";
 }
 
 function crearCorazon(){
+const heart=document.createElement("div");
 
-const e=document.createElement("div");
+heart.classList.add("heart");
 
-e.className="corazon";
+heart.innerHTML="❤️";
 
-e.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
 
-e.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=
+(Math.random()*4+4)+"s";
 
-e.style.fontSize=(20+Math.random()*30)+"px";
+document.body.appendChild(heart);
 
-e.style.animationDuration=(4+Math.random()*5)+"s";
-
-document.body.appendChild(e);
-
-setTimeout(()=>e.remove(),9000);
-
+setTimeout(()=>{
+heart.remove();
+},8000);
 }
 
-function crearRosa(){
-
-const e=document.createElement("div");
-
-e.className="rosa";
-
-e.innerHTML="🌹";
-
-e.style.left=Math.random()*100+"vw";
-
-e.style.fontSize=(20+Math.random()*25)+"px";
-
-e.style.animationDuration=(5+Math.random()*5)+"s";
-
-document.body.appendChild(e);
-
-setTimeout(()=>e.remove(),10000);
-
-}
-
-setInterval(crearCorazon,500);
-setInterval(crearRosa,350);
+setInterval(crearCorazon,300);
 
 </script>
 
 </body>
 </html>
-```
