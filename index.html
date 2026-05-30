@@ -20,16 +20,17 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
+background:black;
 }
 
-video{
+#videoFondo{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
 object-fit:cover;
-z-index:-2;
+z-index:-3;
 }
 
 .overlay{
@@ -39,7 +40,7 @@ left:0;
 width:100%;
 height:100%;
 background:rgba(0,0,0,.55);
-z-index:-1;
+z-index:-2;
 }
 
 .phone{
@@ -47,24 +48,24 @@ width:360px;
 height:720px;
 background:#111;
 border-radius:40px;
-padding:12px;
-box-shadow:0 0 40px rgba(255,255,255,.2);
+padding:10px;
+box-shadow:0 0 30px rgba(255,255,255,.3);
 }
 
 .screen{
 height:100%;
-background:url("https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200") center/cover;
 border-radius:30px;
 overflow:hidden;
 display:flex;
 flex-direction:column;
+background:#ece5dd;
 }
 
 .header{
 background:#075E54;
 color:white;
 padding:15px;
-font-size:22px;
+font-size:20px;
 font-weight:bold;
 }
 
@@ -76,8 +77,8 @@ overflow-y:auto;
 
 .msg{
 padding:10px 15px;
-margin:10px 0;
 border-radius:15px;
+margin:10px 0;
 max-width:80%;
 animation:fade .5s;
 }
@@ -85,30 +86,80 @@ animation:fade .5s;
 .yo{
 background:#DCF8C6;
 margin-left:auto;
-color:black;
 }
 
 .ella{
 background:white;
-color:black;
 }
 
 .input{
-padding:10px;
 background:#202C33;
+padding:15px;
 display:flex;
 justify-content:center;
 }
 
 button{
-padding:12px 20px;
+padding:12px 25px;
 border:none;
-border-radius:25px;
+border-radius:30px;
 background:#25D366;
 color:white;
 font-size:16px;
 cursor:pointer;
 font-weight:bold;
+}
+
+.typing{
+color:#666;
+font-style:italic;
+padding:10px;
+}
+
+.final{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.9);
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:30px;
+color:white;
+}
+
+.final h1{
+font-size:50px;
+margin-bottom:20px;
+}
+
+.final p{
+font-size:24px;
+max-width:900px;
+line-height:1.8;
+}
+
+.heart{
+position:fixed;
+bottom:-50px;
+font-size:30px;
+animation:subir linear infinite;
+pointer-events:none;
+}
+
+@keyframes subir{
+0%{
+transform:translateY(0);
+opacity:1;
+}
+100%{
+transform:translateY(-120vh);
+opacity:0;
+}
 }
 
 @keyframes fade{
@@ -122,38 +173,12 @@ transform:translateY(0);
 }
 }
 
-.final{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-display:none;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-background:rgba(0,0,0,.8);
-color:white;
-text-align:center;
-padding:20px;
-}
-
-.final h1{
-font-size:50px;
-margin-bottom:20px;
-}
-
-.final p{
-font-size:24px;
-max-width:800px;
-line-height:1.7;
-}
-
 </style>
 </head>
+
 <body>
 
-<video autoplay muted loop playsinline>
+<video id="videoFondo" loop playsinline>
 <source src="b0d98ba93d1049b2021946719203bb3b.mp4" type="video/mp4">
 </video>
 
@@ -184,15 +209,17 @@ Enviar ❤️
 <h1>❤️ Dorelly ❤️</h1>
 
 <p>
-No sé si esta página logre expresar todo lo que siento.
+No hice esta página para impresionarte.
 
-Pero quería que supieras que eres una persona muy especial para mí.
+La hice porque quería que supieras que eres alguien muy especial para mí.
 
 Cada conversación contigo hace mis días mejores.
 
 Y si algo tengo claro...
 
-es que me encanta haberte conocido. 🌹
+es que me encanta haberte conocido.
+
+🌹❤️🌹
 </p>
 
 </div>
@@ -203,18 +230,18 @@ let iniciado=false;
 
 const mensajes=[
 
-{tipo:"yo",texto:"Hola Dorelly ❤️"},
-{tipo:"ella",texto:"Hola 😊"},
-{tipo:"yo",texto:"Quería decirte algo..."},
-{tipo:"ella",texto:"¿Qué pasa?"},
-{tipo:"yo",texto:"Que me alegras los días más de lo que imaginas."},
-{tipo:"ella",texto:"🥹"},
-{tipo:"yo",texto:"Que cada vez que hablo contigo sonrío."},
-{tipo:"yo",texto:"Y que eres una persona increíble."},
-{tipo:"ella",texto:"❤️"},
-{tipo:"yo",texto:"Por eso hice esta página para ti."},
-{tipo:"yo",texto:"Porque quería que supieras lo especial que eres."}
-
+["yo","Hola Dorelly ❤️"],
+["ella","Hola 😊"],
+["yo","Quería decirte algo."],
+["ella","¿Qué pasó?"],
+["yo","Que eres una persona increíble."],
+["ella","🥹"],
+["yo","Que me gusta hablar contigo."],
+["yo","Que me haces sonreír."],
+["ella","❤️"],
+["yo","Por eso hice esta página."],
+["yo","Porque quería que supieras lo especial que eres."],
+["yo","Gracias por existir 🌹"]
 ];
 
 function iniciarHistoria(){
@@ -223,21 +250,43 @@ if(iniciado) return;
 
 iniciado=true;
 
+const video=document.getElementById("videoFondo");
+
+video.muted=false;
+video.volume=1;
+
+video.play().catch(()=>{});
+
 let i=0;
 
 const intervalo=setInterval(()=>{
 
 const chat=document.getElementById("chat");
 
+const typing=document.createElement("div");
+typing.className="typing";
+typing.id="typing";
+typing.innerText="escribiendo...";
+chat.appendChild(typing);
+
+chat.scrollTop=chat.scrollHeight;
+
+setTimeout(()=>{
+
+const t=document.getElementById("typing");
+
+if(t) t.remove();
+
 const div=document.createElement("div");
 
-div.className="msg "+mensajes[i].tipo;
-
-div.innerText=mensajes[i].texto;
+div.className="msg "+mensajes[i][0];
+div.innerText=mensajes[i][1];
 
 chat.appendChild(div);
 
 chat.scrollTop=chat.scrollHeight;
+
+},1000);
 
 i++;
 
@@ -249,13 +298,33 @@ setTimeout(()=>{
 
 document.getElementById("final").style.display="flex";
 
-},4000);
+},5000);
 
 }
 
-},1800);
+},2500);
 
 }
+
+function crearCorazon(){
+
+const heart=document.createElement("div");
+
+heart.className="heart";
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(Math.random()*4+4)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},8000);
+
+}
+
+setInterval(crearCorazon,400);
 
 </script>
 
