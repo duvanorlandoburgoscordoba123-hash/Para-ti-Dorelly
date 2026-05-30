@@ -6,6 +6,7 @@
 <title>Para Dorelly ❤️</title>
 
 <style>
+
 *{
 margin:0;
 padding:0;
@@ -14,44 +15,63 @@ font-family:'Segoe UI',sans-serif;
 }
 
 body{
-background:linear-gradient(135deg,#ff758c,#ff7eb3);
-overflow-x:hidden;
+overflow:hidden;
 color:white;
 text-align:center;
 }
 
-section{
-min-height:100vh;
+#videoFondo{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-3;
+}
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.55);
+z-index:-2;
+}
+
+.contenido{
+height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-padding:30px;
+padding:20px;
 }
 
 h1{
-font-size:3rem;
+font-size:4rem;
+text-shadow:0 0 20px rgba(255,255,255,.8);
 margin-bottom:20px;
-text-shadow:0 0 15px rgba(255,255,255,.6);
 }
 
 p{
-max-width:800px;
-font-size:1.2rem;
+max-width:900px;
+font-size:1.4rem;
 line-height:1.8;
-margin-bottom:20px;
+margin-bottom:25px;
 }
 
 button{
-padding:15px 30px;
+padding:16px 35px;
 border:none;
 border-radius:50px;
 background:white;
-color:#ff4f81;
+color:#ff2d75;
 font-size:1rem;
 font-weight:bold;
 cursor:pointer;
-transition:.3s;
+transition:.4s;
 }
 
 button:hover{
@@ -62,255 +82,225 @@ transform:scale(1.1);
 display:none;
 }
 
-video{
-width:90%;
-max-width:800px;
-border-radius:20px;
-box-shadow:0 0 25px rgba(0,0,0,.4);
-margin-top:20px;
+#contador{
+font-size:1.6rem;
+margin-top:25px;
 }
 
-#respuesta{
-font-size:2rem;
-margin-top:20px;
-animation:aparecer 1s;
-}
-
-@keyframes aparecer{
-from{
-opacity:0;
-transform:translateY(20px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
+#carta{
+font-size:1.4rem;
+max-width:900px;
+line-height:2;
 }
 
 .heart{
 position:fixed;
-font-size:25px;
-animation:caer linear infinite;
-top:-50px;
-z-index:999;
+bottom:-50px;
+font-size:30px;
+animation:subir linear infinite;
+pointer-events:none;
 }
 
-@keyframes caer{
-to{
-transform:translateY(110vh);
+@keyframes subir{
+0%{
+transform:translateY(0);
+opacity:1;
+}
+100%{
+transform:translateY(-120vh);
+opacity:0;
 }
 }
+
+#videoFinal{
+width:90%;
+max-width:900px;
+border-radius:20px;
+box-shadow:0 0 30px rgba(255,255,255,.3);
+}
+
+#mensajeFinal{
+font-size:2rem;
+margin-top:30px;
+}
+
 </style>
 </head>
 
 <body>
 
-<section id="inicio">
-<h1>❤️ Para Dorelly ❤️</h1>
-
-<p>
-Hola Dorelly...
-Esta no es una página cualquiera.
-Es algo que hice pensando en ti.
-</p>
-
-<button onclick="mostrarCarta()">
-Quiero descubrirlo ✨
-</button>
-</section>
-
-<section id="carta" class="hidden">
-
-<h1>🌹 Una pequeña carta</h1>
-
-<p id="texto"></p>
-
-<button onclick="mostrarVideo1()">
-Continuar ❤️
-</button>
-
-</section>
-
-<section id="video1" class="hidden">
-
-<h1>🎥 Un recuerdo especial</h1>
-
-<p>
-Hay momentos que valen la pena guardar...
-porque nos recuerdan personas especiales.
-</p>
-
-<video controls>
+<video autoplay muted loop playsinline id="videoFondo">
 <source src="b0d98ba93d1049b2021946719203bb3b.mp4" type="video/mp4">
 </video>
 
-<br><br>
+<div class="overlay"></div>
 
-<button onclick="mostrarJuego()">
-Seguir 💕
-</button>
+<div class="contenido" id="inicio">
 
-</section>
-
-<section id="juego" class="hidden">
-
-<h1>💖 Una pregunta para ti</h1>
-
-<p>¿Crees en las casualidades?</p>
-
-<br>
-
-<button onclick="respuesta()">
-Sí
-</button>
-
-<button onclick="respuesta()">
-No
-</button>
-
-<div id="respuesta"></div>
-
-<br>
-
-<button id="btnFinal" class="hidden" onclick="mostrarVideo2()">
-Continuar ❤️
-</button>
-
-</section>
-
-<section id="video2" class="hidden">
-
-<h1>🎬 Algo más para ti</h1>
+<h1>Dorelly ❤️</h1>
 
 <p>
-Y si algún día dudas de lo especial que eres,
-vuelve a ver esto.
+Hay personas que pasan por nuestra vida...
+y otras que hacen que los días tengan más color.
 </p>
 
-<video controls>
+<button onclick="abrirCarta()">
+Abrir mi corazón 💌
+</button>
+
+</div>
+
+<div class="contenido hidden" id="pantallaCarta">
+
+<h1>Para ti 🌹</h1>
+
+<p id="carta"></p>
+
+<div id="contador"></div>
+
+<br>
+
+<button onclick="mostrarVideoFinal()">
+Quiero ver más ❤️
+</button>
+
+</div>
+
+<div class="contenido hidden" id="pantallaVideo">
+
+<h1>Mi sorpresa para ti 🎥</h1>
+
+<video id="videoFinal" controls autoplay>
 <source src="d6dc3f8a3f4b58de49c2f94e281ad6e9.mp4" type="video/mp4">
 </video>
 
 <br><br>
 
-<button onclick="finalRomantico()">
+<button onclick="mostrarFinal()">
 Última sorpresa ❤️
 </button>
 
-</section>
+</div>
 
-<section id="final" class="hidden">
+<div class="contenido hidden" id="pantallaFinal">
 
-<h1>💘 Dorelly 💘</h1>
+<h1>💖 Dorelly 💖</h1>
 
-<p style="font-size:1.5rem;">
+<p id="mensajeFinal">
 No hice esta página para impresionarte.
-La hice porque quería que supieras que eres alguien muy importante para mí.
 
-<br><br>
+La hice porque quería que supieras que eres alguien muy especial para mí.
 
-No sé qué nos depare el futuro,
-pero sí sé que cada momento contigo ha significado mucho.
+Gracias por cada conversación,
+cada sonrisa y cada momento.
 
-<br><br>
-
-Gracias por existir. ❤️
+❤️
 </p>
 
 <br>
 
-<button onclick="sonrisa()">
+<button onclick="respuestaFinal()">
 ¿Me regalas una sonrisa? 😊
 </button>
 
-<div id="sonrisa"></div>
+<div id="mensajeRespuesta"></div>
 
-</section>
+</div>
 
 <script>
 
-const mensaje = `
-No sé exactamente cuándo empezó todo,
-pero poco a poco te convertiste en alguien especial para mí.
+const texto = `
+No sé exactamente cuándo comenzó todo.
 
-Hay personas que llegan y pasan,
-y hay otras que dejan algo bonito en el corazón.
+Pero hubo un momento en que hablar contigo se volvió una de las mejores partes de mis días.
 
-Tú eres de esas personas.
+Hay personas que llegan sin avisar y terminan ocupando un lugar importante en nuestro corazón.
 
-Por eso hice esto...
-para que supieras cuánto vales.
+Tú eres una de ellas.
+
+Por eso hice esto.
+
+Porque quería que supieras que eres especial.
 `;
 
 let i=0;
 
-function mostrarCarta(){
-document.getElementById("inicio").classList.add("hidden");
-document.getElementById("carta").classList.remove("hidden");
+function abrirCarta(){
 
-let intervalo=setInterval(()=>{
-if(i<mensaje.length){
-document.getElementById("texto").innerHTML+=mensaje.charAt(i);
+document.getElementById("inicio").classList.add("hidden");
+document.getElementById("pantallaCarta").classList.remove("hidden");
+
+let efecto=setInterval(()=>{
+
+if(i<texto.length){
+document.getElementById("carta").innerHTML+=texto.charAt(i);
 i++;
 }else{
-clearInterval(intervalo);
+clearInterval(efecto);
 }
+
 },40);
+
 }
 
-function mostrarVideo1(){
-document.getElementById("carta").classList.add("hidden");
-document.getElementById("video1").classList.remove("hidden");
+function mostrarVideoFinal(){
+
+document.getElementById("pantallaCarta").classList.add("hidden");
+document.getElementById("pantallaVideo").classList.remove("hidden");
+
 }
 
-function mostrarJuego(){
-document.getElementById("video1").classList.add("hidden");
-document.getElementById("juego").classList.remove("hidden");
+function mostrarFinal(){
+
+document.getElementById("pantallaVideo").classList.add("hidden");
+document.getElementById("pantallaFinal").classList.remove("hidden");
+
 }
 
-function respuesta(){
+function respuestaFinal(){
 
-document.getElementById("respuesta").innerHTML=
-"❤️ Porque conocerte fue la mejor casualidad que me ha pasado ❤️";
+document.getElementById("mensajeRespuesta").innerHTML=
+"<h2 style='margin-top:30px'>Sabía que sí ❤️😊</h2>";
 
-document.getElementById("btnFinal").classList.remove("hidden");
-}
-
-function mostrarVideo2(){
-document.getElementById("juego").classList.add("hidden");
-document.getElementById("video2").classList.remove("hidden");
-}
-
-function finalRomantico(){
-document.getElementById("video2").classList.add("hidden");
-document.getElementById("final").classList.remove("hidden");
-}
-
-function sonrisa(){
-document.getElementById("sonrisa").innerHTML=
-"<h2>Sabía que sí 😊❤️</h2>";
 }
 
 function crearCorazon(){
-const heart=document.createElement("div");
 
-heart.classList.add("heart");
+let heart=document.createElement("div");
 
+heart.className="heart";
 heart.innerHTML="❤️";
 
 heart.style.left=Math.random()*100+"vw";
-
-heart.style.animationDuration=
-(Math.random()*4+4)+"s";
+heart.style.animationDuration=(Math.random()*4+4)+"s";
 
 document.body.appendChild(heart);
 
 setTimeout(()=>{
 heart.remove();
 },8000);
+
 }
 
-setInterval(crearCorazon,300);
+setInterval(crearCorazon,250);
+
+const fechaInicio = new Date("2025-01-01");
+
+function actualizarContador(){
+
+const ahora = new Date();
+
+const diferencia = ahora - fechaInicio;
+
+const dias = Math.floor(diferencia/(1000*60*60*24));
+
+document.getElementById("contador").innerHTML=
+"🌹 Han pasado <b>"+dias+"</b> días desde que comenzó esta historia 🌹";
+
+}
+
+setInterval(actualizarContador,1000);
+actualizarContador();
 
 </script>
 
