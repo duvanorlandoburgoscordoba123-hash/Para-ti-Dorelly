@@ -16,8 +16,8 @@ font-family:Arial,sans-serif;
 
 body{
 overflow:hidden;
-color:white;
 height:100vh;
+color:white;
 }
 
 video{
@@ -41,29 +41,23 @@ z-index:-1;
 }
 
 .contenedor{
-text-align:center;
-padding:80px 20px;
 position:relative;
 z-index:10;
+text-align:center;
+padding:80px 20px;
 }
 
 h1{
 font-size:4rem;
 margin-bottom:20px;
-text-shadow:0 0 20px pink;
-animation:brillo 2s infinite alternate;
-}
-
-@keyframes brillo{
-from{transform:scale(1);}
-to{transform:scale(1.05);}
+text-shadow:0 0 20px #ffb3c6;
 }
 
 p{
 font-size:1.3rem;
 max-width:800px;
 margin:auto;
-margin-bottom:25px;
+margin-bottom:20px;
 }
 
 button{
@@ -74,7 +68,7 @@ border-radius:50px;
 background:#ff4d6d;
 color:white;
 cursor:pointer;
-transition:0.4s;
+transition:.3s;
 }
 
 button:hover{
@@ -83,19 +77,18 @@ transform:scale(1.1);
 
 #mensaje{
 display:none;
-margin-top:40px;
+margin-top:30px;
+padding:25px;
 background:rgba(255,255,255,0.15);
 backdrop-filter:blur(10px);
-padding:30px;
 border-radius:20px;
-max-width:900px;
+max-width:850px;
 margin-left:auto;
 margin-right:auto;
 }
 
 .corazon{
 position:absolute;
-font-size:30px;
 animation:subir linear infinite;
 }
 
@@ -116,7 +109,7 @@ opacity:0;
 <body>
 
 <video autoplay muted loop playsinline>
-<source src="video.mp4" type="video/mp4">
+<source src="b0d98ba93d1049b2021946719203bb3b.mp4" type="video/mp4">
 </video>
 
 <div class="overlay"></div>
@@ -126,8 +119,8 @@ opacity:0;
 <h1>❤️ Para Dorelly ❤️</h1>
 
 <p>
-Desde que llegaste a mi vida, los días tienen más color,
-las sonrisas duran más y cada momento se vuelve especial.
+Desde que llegaste a mi vida, cada día tiene algo especial.
+Tu sonrisa ilumina mis momentos y hace que todo sea más bonito.
 </p>
 
 <button onclick="mostrarMensaje()">
@@ -136,28 +129,26 @@ las sonrisas duran más y cada momento se vuelve especial.
 
 <div id="mensaje">
 
-<h2>💌 Para ti, Dorelly 💌</h2>
+<h2>💌 Un mensaje para ti 💌</h2>
 
 <br>
 
 <p>
-No sé qué tiene tu sonrisa, pero siempre logra alegrarme el día.
+No sé cómo explicarlo exactamente, pero desde que te conocí
+hay momentos que simplemente se sienten diferentes.
 </p>
 
 <p>
-Gracias por existir, por ser tan especial y por hacer que cada conversación contigo valga la pena.
+Me encanta tu forma de ser, tu sonrisa y la alegría que transmites.
 </p>
 
 <p>
-A veces las palabras no alcanzan para expresar todo lo que uno siente,
-pero quería que supieras que ocupas un lugar muy importante en mi corazón.
+Gracias por existir y por hacer que algunos días sean mucho mejores.
 </p>
 
 <br>
 
-<h2>
-🌹 ¿Me permites seguir escribiendo nuestra historia juntos? 🌹
-</h2>
+<h2>🌹 Dorelly, eres muy especial para mí 🌹</h2>
 
 </div>
 
@@ -171,7 +162,7 @@ document.getElementById("mensaje").style.display="block";
 
 function crearCorazon(){
 
-const corazon=document.createElement("div");
+let corazon=document.createElement("div");
 
 corazon.className="corazon";
 
@@ -181,13 +172,13 @@ corazon.style.left=Math.random()*100+"vw";
 
 corazon.style.fontSize=(20+Math.random()*40)+"px";
 
-corazon.style.animationDuration=(4+Math.random()*5)+"s";
+corazon.style.animationDuration=(4+Math.random()*6)+"s";
 
 document.body.appendChild(corazon);
 
 setTimeout(()=>{
 corazon.remove();
-},9000);
+},10000);
 
 }
 
