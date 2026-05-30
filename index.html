@@ -6,52 +6,159 @@
 <title>Para Dorelly ❤️</title>
 
 <style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
 body{
-background: linear-gradient(135deg,#ff758c,#ff7eb3);
-font-family: Arial, sans-serif;
-text-align:center;
-color:white;
-padding-top:100px;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#ff4d6d,#ff8fab);
+    min-height:100vh;
+    overflow:hidden;
+    color:white;
+}
+
+.contenedor{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:100px 20px;
 }
 
 h1{
-font-size:50px;
+    font-size:4rem;
+    margin-bottom:20px;
+    text-shadow:0 0 20px rgba(255,255,255,.8);
+}
+
+p{
+    font-size:1.3rem;
+    max-width:700px;
+    margin:auto;
+    margin-bottom:30px;
 }
 
 button{
-padding:15px 25px;
-border:none;
-border-radius:20px;
-font-size:18px;
-cursor:pointer;
+    background:white;
+    color:#ff4d6d;
+    border:none;
+    padding:15px 30px;
+    border-radius:30px;
+    font-size:20px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.1);
 }
 
 #mensaje{
-display:none;
-font-size:24px;
-margin-top:20px;
+    display:none;
+    margin-top:30px;
+    background:rgba(255,255,255,.2);
+    padding:25px;
+    border-radius:20px;
+    max-width:800px;
+    margin-left:auto;
+    margin-right:auto;
+    backdrop-filter:blur(10px);
 }
+
+.corazon{
+    position:absolute;
+    color:#fff;
+    font-size:30px;
+    animation:flotar linear infinite;
+    opacity:.8;
+}
+
+@keyframes flotar{
+    from{
+        transform:translateY(100vh);
+    }
+    to{
+        transform:translateY(-100px);
+    }
+}
+
 </style>
 </head>
 
 <body>
 
-<h1>❤️ Para Dorelly ❤️</h1>
+<div id="corazones"></div>
 
-<p>Desde que llegaste a mi vida, cada día tiene algo especial.</p>
+<div class="contenedor">
 
-<button onclick="mostrar()">
-Haz clic aquí
-</button>
+    <h1>❤️ Para Dorelly ❤️</h1>
 
-<div id="mensaje">
-✨ Dorelly, eres una persona muy importante para mí ❤️ ✨
+    <p>
+        Desde que llegaste a mi vida, todo se volvió más bonito.
+        Tu sonrisa ilumina mis días y tu forma de ser hace que
+        cada momento sea especial.
+    </p>
+
+    <button onclick="mostrarMensaje()">
+        Haz clic aquí 💖
+    </button>
+
+    <div id="mensaje">
+        <h2>💌 Para ti, Dorelly 💌</h2>
+
+        <br>
+
+        <p>
+            Eres una persona increíble, llena de luz, alegría y ternura.
+            Gracias por cada sonrisa y cada momento compartido.
+        </p>
+
+        <p>
+            ❤️ Gracias por llegar a mi vida ❤️
+        </p>
+
+        <h2>
+            ¿Me permites seguir escribiendo nuestra historia juntos? 🌹
+        </h2>
+
+    </div>
+
 </div>
 
 <script>
-function mostrar(){
-document.getElementById("mensaje").style.display="block";
+
+function mostrarMensaje(){
+    document.getElementById("mensaje").style.display="block";
 }
+
+function crearCorazon(){
+
+    const corazon = document.createElement("div");
+
+    corazon.classList.add("corazon");
+
+    corazon.innerHTML = "❤";
+
+    corazon.style.left = Math.random()*100 + "vw";
+
+    corazon.style.animationDuration =
+    (Math.random()*5 + 5) + "s";
+
+    corazon.style.fontSize =
+    (Math.random()*30 + 20) + "px";
+
+    document.body.appendChild(corazon);
+
+    setTimeout(()=>{
+        corazon.remove();
+    },10000);
+}
+
+setInterval(crearCorazon,300);
+
 </script>
 
 </body>
